@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="content">
+
+    <div class="container">
+      <br>
+      <br>
+      <h1 class="mb-5" style="font-size:200">LIST OF DISEASE </h1>
+
+
+      <div class="table-responsive custom-table-responsive">
+
+        <table class="table table-dark table-hover">
+          <thead>
+            <tr>
+
+              <th scope="col">
+                Sr No.
+              </th>
+
+              <th scope="col">Disease</th>
+              <th scope="col">Description</th>
+              <th scope="col">Add</th>
+            </tr>
+          </thead>
+          <tbody >
+          {% for disease in data %}
+            <tr class="disease"  scope="row">
+               <td>{{disease.id}}</td>
+
+              <td>{{disease.name}}</td>
+              <td class="text">
+                {{disease.description}}
+                <small class="d-block"></small>
+              </td>
+              <td>
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                  <a href="{% url 'recipe_upload' disease.id %}">
+                <button type="button" class="btn btn-danger">Open</button>
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+
+
+
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+
+  </div>
+
+<script>
+    console.log("aka");
+    console.log(this.data);
+    e=document.getElementById("home");
+    e.className+=" active";
+    console.log(e);
+
+    const searchBtn=document.getElementById("search");
+    searchBtn.addEventListener('click',search1);
+
+    function search1() {
+
+    let input = document.getElementById('searchbar').value;
+    input=input.toLowerCase();
+
+    let x = document.getElementsByClassName('disease');
+
+    console.log(x)
+
+    for (i = 0; i < x.length; i++) {
+
+        if (!x[i].innerHTML.toLowerCase().includes(input)) {
+            x[i].style.display="none";
+        }
+    }
+
+}
+</script>
+
+
+
+{% endblock %}

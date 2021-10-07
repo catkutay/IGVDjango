@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block content %}
+   <div class="container">
+      <br>
+      <h1 class="mb-5" style="font-size:200">{{data.disease.name}}</h1>
+
+
+      <div align="middle" class="table-responsive custom-table-responsive">
+       <table>
+
+     <tr scope="row" >
+           <img src ={{data.image1.url}} width="500" height="350" align="centre">
+     </tr>
+           <br>
+           <br>
+
+      <tr scope="row" >
+          <p align="left">{{data.description1}}</p>
+      </tr>
+           <br>
+           <br>
+       <tr scope="row">
+           <img src ={{data.image2.url}} width="500" height="350" align="centre">
+     </tr>
+           <br>
+           <br>
+
+      <tr scope="row" m>
+          <p text-align="left">{{data.description2}}</p>
+      </tr>
+           <br>
+           <br>
+    <tr scope="row" >
+           <img src ={{data.image3.url}} width="500" height="350" align="centre">
+     </tr>
+           <br>
+           <br>
+
+      <tr scope="row" >
+          <p text-align="left">{{data.description3}}</p>
+      </tr>
+           <br>
+           <br>
+   <tr scope="row">
+           <img src ={{data.image4.url}} width="500" height="350" align="centre">
+     </tr>
+           <br>
+           <br>
+<
+
+      <tr scope="row">
+          <p text-align="left">{{data.description4}}</p>
+      </tr>
+      </table>
+      </div>
+   </div>
+      <br>
+
+  
+
+<script>
+
+    let e=document.getElementById("recipe");
+    e.className+=" active";
+    e=document.getElementById("searchbar");
+    e.style.display="none";
+</script>
+
+{% endblock %}
