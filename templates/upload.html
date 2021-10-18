@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% block content %}
+   <div class="container">
+
+       <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+  <button type="button" id="record" class="btn btn-danger">Start</button>
+  <button type="button" id="stop" class="btn btn-warning">Stop</button>
+ <button type="button" id="play" class="btn btn-warning">Play</button>
+
+</div>
+<div class="form-group">
+ <form id="form1" method = "post" enctype="multipart/form-data">
+     {% csrf_token %}
+     <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="AKASH GOYAL">
+     </div>
+     <div class="mb-3">
+          <label for="desc1" class="form-label">Description</label>
+          <textarea class="form-control" id="desc1" name="desc1" rows="3"></textarea>
+     </div>
+     <div class="mb-3">
+        <label for="image1" class="form-label">Image</label>
+        <input class="form-control" type="file" id="image1" name="image1">
+    </div>
+       <div class="mb-3">
+          <label for="desc2" class="form-label">Description</label>
+          <textarea class="form-control" id="desc2" name="desc2" rows="3"></textarea>
+     </div>
+     <div class="mb-3">
+        <label for="image2" class="form-label">Image</label>
+        <input class="form-control" type="file" id="image2" name="image2">
+    </div>
+       <div class="mb-3">
+          <label for="desc3" class="form-label">Description</label>
+          <textarea class="form-control" id="desc3" name="desc3" rows="3"></textarea>
+     </div>
+     <div class="mb-3">
+        <label for="image3" class="form-label">Image</label>
+        <input class="form-control" type="file" id="image3" name="image3">
+    </div>
+       <div class="mb-3">
+          <label for="desc4" class="form-label">Description</label>
+          <textarea class="form-control" id="desc4" name="desc4" rows="3"></textarea>
+     </div>
+     <div class="mb-3">
+        <label for="image4" class="form-label">Image</label>
+        <input class="form-control" type="file" id="image4" name="image4">
+    </div>
+     <div class="mb-3">
+        <label for="audio" class="form-label">Audio</label>
+        <input class="form-control" type="hidden" id="audio" name="audio">
+    </div>
+
+       <button type="submit" class="btn btn-primary">Submit</button>
+ </form>
+</div>
+<script>
+
+    let e=document.getElementById("recipe");
+    e.className+=" active";
+    e=document.getElementById("searchbar");
+    e.style.display="none";
+
+    const recordAudio = () =>
+        new Promise(async resolve => {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          const mediaRecorder = new MediaRecorder(stream);
+          let audioChunks = [];
+
+          mediaRecorder.addEventListener('dataavailable', event => {
+            audioChunks.push(event.data);
+          });
+
+          const start = () => {
+            audioChunks = [];
+            mediaRecorder.start();
+          };
+
+          const stop = () =>
+            new Promise(resolve => {
+              mediaRecorder.addEventListener('stop', () => {
+                const audioBlob = new Blob(audioChunks);
+                const audioUrl = URL.createObjectURL(audioBlob);
+                console.log(audioUrl)
+                var filename = new Date().toISOString();
+                var audioTag=document.getElementById("audio")
+                audioTag.value = audioBlob
+                const audio = new Audio(audioUrl);
+                const play = () => audio.play();
+                resolve({ audioChunks, audioBlob, audioUrl, play });
+              });
+
+              mediaRecorder.stop();
+            });
+
+          resolve({ start, stop });
+        });
+
+      const sleep = time => new Promise(resolve => setTimeout(resolve, time));
+
+      const recordButton = document.getElementById("record");
+      const stopButton = document.getElementById("stop");
+      const playButton = document.getElementById("play");
+
+      let recorder;
+      let audio;
+
+      recordButton.addEventListener('click', async () => {
+        console.log("start")
+        recordButton.setAttribute('disabled', true);
+        stopButton.removeAttribute('disabled');
+        playButton.setAttribute('disabled', true);
+        if (!recorder) {
+          recorder = await recordAudio();
+        }
+        recorder.start();
+      });
+
+      stopButton.addEventListener('click', async () => {
+      console.log("stop")
+        recordButton.removeAttribute('disabled');
+        stopButton.setAttribute('disabled', true);
+        playButton.removeAttribute('disabled');
+        audio = await recorder.stop();
+
+
+      });
+
+      playButton.addEventListener('click', () => {
+      console.log("play")
+        audio.play();
+      });
+
+
+
+
+
+</script>
+
+{% endblock %}

@@ -56,7 +56,19 @@
    </div>
       <br>
 
-  
+       <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+  <button type="button" id="record" class="btn btn-danger">Start</button>
+  <button type="button" id="stop" class="btn btn-warning">Stop</button>
+ <button type="button" id="play" class="btn btn-warning">Play</button>
+
+</div>
+
+ <form method = "post" enctype="multipart/form-data">
+     {% csrf_token %}
+     <table>{{ form.as_table }}</table>
+
+        <button type="submit">Upload</button>
+    </form>
 
 <script>
 

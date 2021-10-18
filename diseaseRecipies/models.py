@@ -34,7 +34,8 @@ class User(models.Model):
 class Recipies(models.Model):
     id = models.AutoField(primary_key=True)
     #user = models.ForeignKey(User,on_delete= models.CASCADE,null=True)
-    name=models.CharField(max_length=45,default="")
+    name = models.CharField(max_length=45,default="")
+    audio = models.FileField(upload_to="audios/", default="")
     disease = models.ForeignKey(Disease,on_delete= models.CASCADE,null=True)
     image1 = models.ImageField(upload_to="images/", default="")
     description1 = models.TextField(max_length=400, default="")
