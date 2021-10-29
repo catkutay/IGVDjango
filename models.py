@@ -25,6 +25,8 @@ class Disease(models.Model):
     class Meta:
         db_table = 'disease'
 
+
+
 class User(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=45)

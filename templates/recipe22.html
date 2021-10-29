@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block content %}
+   <div class="container">
+      <br>
+      <h1 class="mb-5" style="font-size:200">{{data.disease.name}}</h1>
+
+
+      <div align="middle" class="table-responsive custom-table-responsive">
+       <table>
+
+     <tr scope="row" >
+           <img id="img1" src ={{data.image1.url}} width="500" height="350" align="centre">
+     </tr>
+           <br>
+           <br>
+    <tr scope ="row">
+        <audio style="display:none" type="hidden" id="aud1" controls="controls">
+     <source src={{data.audio1.url}}>
+        </audio>
+    </tr>
+           <br>
+           <br>
+      <tr scope="row" >
+          <p align="left">{{data.description1}}</p>
+      </tr>
+           <br>
+           <br>
+       <tr scope="row">
+           <img id="img2" src ={{data.image2.url}} width="500" height="350" align="centre">
+     </tr>
+           <br>
+           <br>
+ <tr scope ="row">
+        <audio style="display:none" id="aud2" controls="controls">
+     <source src={{data.audio2.url}}>
+        </audio>
+    </tr>
+           <br>
+           <br>
+      <tr scope="row" m>
+          <p text-align="left">{{data.description2}}</p>
+      </tr>
+           <br>
+           <br>
+    <tr scope="row" >
+           <img id="img3" src ={{data.image3.url}} width="500" height="350" align="centre">
+     </tr>
+           <br>
+           <br>
+ <tr scope ="row">
+        <audio style="display:none" type="hidden" id="aud3" controls="controls">
+     <source src={{data.audio3.url}}>
+        </audio>
+    </tr>
+           <br>
+           <br>
+      <tr scope="row" >
+          <p text-align="left">{{data.description3}}</p>
+      </tr>
+           <br>
+           <br>
+   <tr scope="row">
+           <img id="img4" src ={{data.image4.url}} width="500" height="350" align="centre">
+     </tr>
+           <br>
+           <br>
+ <tr scope ="row">
+        <audio style="display:none" type="hidden" id="aud4" controls="controls">
+     <source src={{data.audio4.url}}>
+        </audio>
+    </tr>
+           <br>
+           <br>
+
+      <tr scope="row">
+          <p text-align="left">{{data.description4}}</p>
+      </tr>
+      </table>
+      </div>
+   </div>
+      <br>
+
+
+
+<script>
+    let e1=document.getElementById("img1");
+    e1.addEventListener("click", function(){
+        document.getElementById("aud1").play();
+    });
+    e1=document.getElementById("img2");
+    e1.addEventListener("click", function(){
+        document.getElementById("aud2").play();
+    });
+    e1=document.getElementById("img3");
+    e1.addEventListener("click", function(){
+        document.getElementById("aud3").play();
+    });
+    e1=document.getElementById("img4");
+    e1.addEventListener("click", function(){
+        document.getElementById("aud4").play();
+    });
+    let e=document.getElementById("recipe");
+    e.className+=" active";
+    e=document.getElementById("searchbar");
+    e.style.display="none";
+</script>
+
+{% endblock %}

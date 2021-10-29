@@ -31,20 +31,30 @@ class User(models.Model):
     def __str__(self):
         return self.name
 
+
 class Recipies(models.Model):
+
     id = models.AutoField(primary_key=True)
     #user = models.ForeignKey(User,on_delete= models.CASCADE,null=True)
     name = models.CharField(max_length=45,default="")
-    audio = models.FileField(upload_to="audios/", default="")
     disease = models.ForeignKey(Disease,on_delete= models.CASCADE,null=True)
+    audio1 = models.FileField(upload_to="audios/", default="")
     image1 = models.ImageField(upload_to="images/", default="")
     description1 = models.TextField(max_length=400, default="")
+    audioDesc1=models.FileField(upload_to="audios/", default="")
+    audio2 = models.FileField(upload_to="audios/", default="")
     image2 = models.ImageField(upload_to="images/", default="")
     description2 = models.TextField(max_length=400, default="")
+    audioDesc2=models.FileField(upload_to="audios/", default="")
+    audio3 = models.FileField(upload_to="audios/", default="")
     image3 = models.ImageField(upload_to="images/", default="")
     description3 = models.TextField(max_length=400, default="")
+    audioDesc3=models.FileField(upload_to="audios/", default="")
+    audio4 = models.FileField(upload_to="audios/", default="")
     image4 = models.ImageField(upload_to="images/", default="")
     description4 = models.TextField(max_length=400, default="")
+    audioDesc4=models.FileField(upload_to="audios/", default="")
 
     class Meta:
         db_table = 'recipies'
+

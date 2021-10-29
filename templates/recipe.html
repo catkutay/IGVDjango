@@ -4,74 +4,67 @@
       <br>
       <h1 class="mb-5" style="font-size:200">{{data.disease.name}}</h1>
 
-
       <div align="middle" class="table-responsive custom-table-responsive">
        <table>
-
+{%for l in dataAll%}
      <tr scope="row" >
-           <img src ={{data.image1.url}} width="500" height="350" align="centre">
+           <img id="img" src ={{l.image}} width="500" height="350" align="centre">
      </tr>
            <br>
            <br>
 
+    <tr scope ="row">
+        <audio style="display:none" type="hidden" id="aud" controls="controls">
+     <source src={{l.audio}}>
+        </audio>
+    </tr>
+           <br>
+           <br>
+
+   <tr scope ="row">
+        <audio style="display:none" id="audDesc" controls="controls">
+     <source src={{l.audioDesc}}>
+        </audio>
+    </tr>
+           <br>
+           <br>
       <tr scope="row" >
-          <p align="left">{{data.description1}}</p>
+          <p id="desc" align="left">{{l.desc}}</p>
       </tr>
            <br>
            <br>
-       <tr scope="row">
-           <img src ={{data.image2.url}} width="500" height="350" align="centre">
-     </tr>
-           <br>
-           <br>
-
-      <tr scope="row" m>
-          <p text-align="left">{{data.description2}}</p>
-      </tr>
-           <br>
-           <br>
-    <tr scope="row" >
-           <img src ={{data.image3.url}} width="500" height="350" align="centre">
-     </tr>
-           <br>
-           <br>
-
-      <tr scope="row" >
-          <p text-align="left">{{data.description3}}</p>
-      </tr>
-           <br>
-           <br>
-   <tr scope="row">
-           <img src ={{data.image4.url}} width="500" height="350" align="centre">
-     </tr>
-           <br>
-           <br>
-<
-
-      <tr scope="row">
-          <p text-align="left">{{data.description4}}</p>
-      </tr>
+{% endfor %}
       </table>
       </div>
    </div>
       <br>
 
-       <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-  <button type="button" id="record" class="btn btn-danger">Start</button>
-  <button type="button" id="stop" class="btn btn-warning">Stop</button>
- <button type="button" id="play" class="btn btn-warning">Play</button>
 
-</div>
-
- <form method = "post" enctype="multipart/form-data">
-     {% csrf_token %}
-     <table>{{ form.as_table }}</table>
-
-        <button type="submit">Upload</button>
-    </form>
 
 <script>
+    let img=document.querySelectorAll('[id=img]');
+    let aud=document.querySelectorAll('[id=aud]');
+    let audDesc=document.querySelectorAll('[id=audDesc]');
+    let desc=document.querySelectorAll('[id=desc]');
+    for(let i=0 ; i<img.length ;i++){
+    img[i].addEventListener("click", function(){
+    for(let j=0;j<aud.length;j++)
+        {aud[j].pause()}
+        for(j=0;j<audDesc.length;j++)
+        {audDesc[j].pause()}
+        aud[i].play();
+    });
+    desc[i].addEventListener("click",function(){
+        for(let j=0;j<aud.length;j++)
+        {aud[j].pause()}
+        for(j=0;j<audDesc.length;j++)
+        if(j!=i)
+        {
+        {audDesc[j].pause()}}
+        audDesc[i].play();
+        });
 
+    }
     let e=document.getElementById("recipe");
     e.className+=" active";
     e=document.getElementById("searchbar");

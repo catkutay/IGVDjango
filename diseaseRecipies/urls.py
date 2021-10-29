@@ -6,7 +6,7 @@ urlpatterns=[
     path('recipe_upload/<int:id>', views.recipe, name='recipe_upload'),
     path('', views.home,name='home'),
     path('recipe/<int:id>', views.recipe, name='recipe'),
-    path('upload/<int:id>', views.upload, name='upload')
+    path('upload/<int:id>', views.upload, name='upload'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,
