@@ -1,74 +1,60 @@
-{% extends 'base.html' %}
-{% block content %}
-   <div class="container">
-      <br>
-      <h1 class="mb-5" style="font-size:200">{{data.disease.name}}</h1>
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="container">
+  <br />
+  <h1 class="mb-5" style="font-size: 200">{{data.disease.name}}</h1>
 
-      <div align="middle" class="table-responsive custom-table-responsive">
-       <table>
-{%for l in dataAll%}
-     <tr scope="row" >
-           <img id="img" src ={{l.image}} width="500" height="350" align="centre">
-     </tr>
-           <br>
-           <br>
-
-    <tr scope ="row">
-        <audio style="display:none" type="hidden" id="aud" controls="controls">
-     <source src={{l.audio}}>
-        </audio>
-    </tr>
-           <br>
-           <br>
-
-   <tr scope ="row">
-        <audio style="display:none" id="audDesc" controls="controls">
-     <source src={{l.audioDesc}}>
-        </audio>
-    </tr>
-           <br>
-           <br>
-      <tr scope="row" >
-          <p id="desc" align="left">{{l.desc}}</p>
+  <div align="middle" class="table-responsive custom-table-responsive">
+    <table>
+      {%for l in dataAll%}
+      <tr scope="row">
+        <img
+          id="img"
+          src="{{l.image}}"
+          width="500"
+          height="350"
+          align="centre"
+        />
       </tr>
-           <br>
-           <br>
-{% endfor %}
-      </table>
-      </div>
-   </div>
-      <br>
+      <br />
+      <br />
 
+      <tr scope="row">
+        <audio style="display: none" type="hidden" id="aud" controls="controls">
+          <source src="{{l.audio}}" />
+        </audio>
+      </tr>
+      <br />
+      <br />
 
-
-<script>
-    let img=document.querySelectorAll('[id=img]');
-    let aud=document.querySelectorAll('[id=aud]');
-    let audDesc=document.querySelectorAll('[id=audDesc]');
-    let desc=document.querySelectorAll('[id=desc]');
-    for(let i=0 ; i<img.length ;i++){
-    img[i].addEventListener("click", function(){
-    for(let j=0;j<aud.length;j++)
-        {aud[j].pause()}
-        for(j=0;j<audDesc.length;j++)
-        {audDesc[j].pause()}
-        aud[i].play();
-    });
-    desc[i].addEventListener("click",function(){
-        for(let j=0;j<aud.length;j++)
-        {aud[j].pause()}
-        for(j=0;j<audDesc.length;j++)
-        if(j!=i)
-        {
-        {audDesc[j].pause()}}
-        audDesc[i].play();
-        });
-
-    }
-    let e=document.getElementById("recipe");
-    e.className+=" active";
-    e=document.getElementById("searchbar");
-    e.style.display="none";
-</script>
-
+      <tr scope="row">
+        <audio style="display: none" id="audDesc" controls="controls">
+          <source src="{{l.audioDesc}}" />
+        </audio>
+      </tr>
+      <br />
+      <br />
+      <tr scope="row">
+        <p id="desc" align="left">{{l.desc}}</p>
+      </tr>
+      <br />
+      <br />
+      {% endfor %}
+    </table>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div id="controls controlsList='nodownload' text-center col">
+      <button id="recordButton" class="btn btn-primary">Record</button>
+      <button id="pauseButton" class="btn btn-primary" disabled>Pause</button>
+      <button id="stopButton" class="btn btn-primary" disabled>Stop</button>
+    </div>
+    <div class="col">
+      <div id="formats">Format: start recording to see sample rate</div>
+      <p id="recordingsList"></li>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+<script src="{% static 'index.js' %}"></script>
 {% endblock %}
