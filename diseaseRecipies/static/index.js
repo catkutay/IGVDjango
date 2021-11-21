@@ -131,6 +131,7 @@ function createDownloadLink(blob) {
   //add controls to the <audio> element
   au.controls = true;
   au.src = url;
+  au.id = "audio-player";
 
   //save to disk link
   //link.href = url;

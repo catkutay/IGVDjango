@@ -7,7 +7,6 @@ from .models import Disease
 from .models import Recipies
 from .models import *
 from .forms import *
-
 from django.core.files import File
 
 
@@ -17,7 +16,7 @@ def home(request):
 
 
 def recipe(request, id):
-    print(id)
+
     image_urls = []
     audio_urls = []
     desc_list = []
@@ -95,7 +94,6 @@ def upload(request, id):
             ins.audioDesc4.save(str(id) + "desc4.mp3", aud)
 
         ins.save()
-
 
     else:
         form = RecipeForm()
